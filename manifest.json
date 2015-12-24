@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Getting started example",
-  "description": "This extension shows a Google Image search result for the current page",
+  "name": "Bookmark Changer",
+  "description": "This extension lets the user select a bookmark that they are constantly changing and switch it to the url of the current tab quickly and conveniently",
   "version": "1.0",
 
   "browser_action": {
@@ -11,7 +11,7 @@
   },
   "permissions": [
     "activeTab",
-    "https://ajax.googleapis.com/"
+    "https://ajax.googleapis.com/",
     "bookmarks"
   ]
 }
