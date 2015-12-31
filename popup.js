@@ -1,52 +1,17 @@
-// Copyright (c) 2014 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-/**
- * Get the current URL.
- *
- * @param {function(string)} callback - called when the URL of the current tab
- *   is found.
- */
 function getCurrentTabUrl(callback) {
-  // Query filter to be passed to chrome.tabs.query - see
-  // https://developer.chrome.com/extensions/tabs#method-query
   var queryInfo = {
     active: true,
     currentWindow: true
   };
-
   chrome.tabs.query(queryInfo, function(tabs) {
-    // chrome.tabs.query invokes the callback with a list of tabs that match the
-    // query. When the popup is opened, there is certainly a window and at least
-    // one tab, so we can safely assume that |tabs| is a non-empty array.
-    // A window can only have one active tab at a time, so the array consists of
-    // exactly one tab.
     var tab = tabs[0];
-
-    // A tab is a plain object that provides information about the tab.
-    // See https://developer.chrome.com/extensions/tabs#type-Tab
     var url = tab.url;
-
-    // tab.url is only available if the "activeTab" permission is declared.
-    // If you want to see the URL of other tabs (e.g. after removing active:true
-    // from |queryInfo|), then the "tabs" permission is required to see their
-    // "url" properties.
     console.assert(typeof url == 'string', 'tab.url should be a string');
-
     callback(url);
   });
-
-  // Most methods of the Chrome extension APIs are asynchronous. This means that
-  // you CANNOT do something like this:
-  //
-  // var url;
-  // chrome.tabs.query(queryInfo, function(tabs) {
-  //   url = tabs[0].url;
-  // });
-  // alert(url); // Shows "undefined", because chrome.tabs.query is async.
 }
 
+//Just for testing/Finding out what the ids of certain bookmarks are.
 function printBookmarks(id, array, callback) {
     chrome.bookmarks.getChildren(id, function(children) {
       children.forEach(function(bookmark) { 
@@ -58,6 +23,7 @@ function printBookmarks(id, array, callback) {
     callback(array);
   }
 
+//Just for testing/Finding out what the ids of certain bookmarks are.
 function showBookmarks(id){
   var arr = [];
   printBookmarks(id, arr, function(array){
@@ -72,4 +38,28 @@ function changeBookmark(id){
   });
 }
 
-document.getElementById("button1").addEventListener("click",changeBookmark("190"));
+function prepButtons(){
+  var b1 = document.getElementById("button1");
+  b1.onclick = function() {
+    changeBookmark("190");
+  };
+
+  var b2 = document.getElementById("button2");
+  b2.onclick = function() {
+    changeBookmark("189");
+  };
+
+  var b3 = document.getElementById("button3");
+  b3.onclick = function() {
+    changeBookmark("188");
+  };
+
+  var b4 = document.getElementById("button4");
+  b4.onclick = function() {
+    changeBookmark("77");
+  };
+}
+
+window.onload = function(){
+  prepButtons();
+}
