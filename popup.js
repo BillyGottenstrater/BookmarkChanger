@@ -58,6 +58,11 @@ function prepButtons(){
   b4.onclick = function() {
     changeBookmark("77");
   };
+
+  var b4 = document.getElementById("button5");
+  b4.onclick = function() {
+    changeBookmark("202");
+  };
 }
 
 window.onload = function(){
