@@ -15,12 +15,10 @@ function getCurrentTabUrl(callback) {
 function printBookmarks(id, array, callback) {
     chrome.bookmarks.getChildren(id, function(children) {
       children.forEach(function(bookmark) { 
-        //console.debug(bookmark.title+" "+bookmark.id+ " | ");
         array.push({title:String(bookmark.title),id:String(bookmark.id)});
-        printBookmarks(bookmark.id,array,callback);
       });
+      callback(array);
     });
-    callback(array);
   }
 
 //Just for testing/Finding out what the ids of certain bookmarks are.
@@ -38,31 +36,55 @@ function changeBookmark(id){
   });
 }
 
+function changeButton(id, buttonId){
+  chrome.bookmarks.get(id,function(arr){
+    var b = document.getElementById(buttonId);
+    b.innerHTML=arr[0].title;
+  });
+}
+
+function changeB(id, button){
+  chrome.bookmarks.get(id,function(arr){
+    button.innerHTML=arr[0].title;
+  });
+}
+
+function initButton(buttonId, id){
+  var b = document.getElementById(buttonId);
+  //changeButton(id,buttonId);
+  b.onclick = function(){
+    changeBookmark(id);
+  }
+}
+
+
 function prepButtons(){
-  var b1 = document.getElementById("button1");
-  b1.onclick = function() {
-    changeBookmark("190");
-  };
+  var count = 0
+  chrome.bookmarks.getChildren("186",function(children){
+    children.forEach(function(child){
+      var btn = document.createElement("button");
+      btn.id=String(count);
+      btn.className = "b";
+      btn.innerHTML=child.title;
+      count++;
+      document.body.insertBefore(btn,document.getElementById("loc"));
+      initButton(btn.id,child.id);
+    });
+  });
+  // for(count;count>=0;count--){
+  //   var btn = document.getElementById(String(count));
+  //   btn.className += "b";
+  // }
 
-  var b2 = document.getElementById("button2");
-  b2.onclick = function() {
-    changeBookmark("189");
-  };
-
-  var b3 = document.getElementById("button3");
-  b3.onclick = function() {
-    changeBookmark("188");
-  };
-
-  var b4 = document.getElementById("button4");
-  b4.onclick = function() {
-    changeBookmark("77");
-  };
-
-  var b4 = document.getElementById("button5");
-  b4.onclick = function() {
-    changeBookmark("202");
-  };
+  // initButton("b1","223");
+  // initButton("b2","189");
+  // initButton("b3","267");
+  // initButton("b4","77");
+  // initButton("b5","202");
+  // initButton("b6","214");
+  // initButton("b7","222");
+  // initButton("b8","225");
+  // initButton("b9","231");
 }
 
 window.onload = function(){

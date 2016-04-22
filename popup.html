@@ -11,40 +11,55 @@
       body {
         font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
         font-size: 100%;
+        width: 357px;
+        background-color: #cccccc;
       }
 
-      #button1, #button2, #button3, #button4 , #button5
+      .b, #settings-button
       {
-        display: block;
+        display: inline-block;
         font-size: .75em;
         font-weight: bold;
-        padding: 10px 15px;
+        padding: 5px 5px;
         color: #ccc;
-        background-color: #555;
-        background: -webkit-linear-gradient(#091d90, #39479D);
-        background: linear-gradient(#091d90, #39479D);
+        background-color: #1b5ba3;
+        /*background: -webkit-linear-gradient(#091d90, #39479D);
+        background: linear-gradient(#091d90, #39479D);*/
         border: 0 none;
         border-radius: 3px;
         text-shadow: 0 -1px 0 #000;
-        box-shadow: 0 1px 0 #666, 0 5px 0 #444, 0 6px 6px rgba(0,0,0,0.6);
+        box-shadow: 0 1px 0 #666, 0 2px 0 #444, 0 6px 6px rgba(0,0,0,0.6);
         cursor: pointer;
+        width:177px;
+        max-height:50px;
+        min-height:50px;
+        text-align: center;
+        margin-top: 4.5px;
       }
-      #button1
+
+      #settings-button
       {
-        margin-top: : 0px;
-      }
-      #button2, #button3, #button4, #button5
-      {
-        margin-top: 7.5px;
+        width: 355px;
+        height: 30px;
+        background-color: #3368a0;
+        background-color: #0450a0;
       }
     </style>
   </head>
   <body>
-    <button id="button1">Naruto Manga</button>
-    <button id="button2">Adventure Time</button>
-    <button id="button3">Hunter x Hunter</button>
-    <button id="button4">Questionable Content</button>
-    <button id="button5">Steven Universe</button>
+    <button id="settings-button">Settings</button>
+    <!-- <button class="b"></button>
+    <button class="b"></button>
+    <button id="b8"></button>
+    <button id="b2"></button>
+    <button id="b3"></button>
+    <button id="b4"></button>
+    <button id="b5"></button>
+    <button id="b6"></button>
+    <button id="b9"></button> -->
+    <div id="loc"></div>
+
+
 
   </body>
   <script src="popup.js"></script>
