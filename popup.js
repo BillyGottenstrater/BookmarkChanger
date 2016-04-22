@@ -57,15 +57,24 @@ function initButton(buttonId, id){
   }
 }
 
+function truncString(str, maxLen){
+  return str.substring(0,maxLen-3)+"...";
+}
+
 
 function prepButtons(){
   var count = 0
+  var maxLen = 23
   chrome.bookmarks.getChildren("186",function(children){
     children.forEach(function(child){
       var btn = document.createElement("button");
       btn.id=String(count);
       btn.className = "b";
-      btn.innerHTML=child.title;
+      if((child.title).length>maxLen){
+      btn.innerHTML=truncString(child.title,maxLen);
+      }else{
+        btn.innerHTML=child.title;
+      }
       count++;
       document.body.insertBefore(btn,document.getElementById("loc"));
       initButton(btn.id,child.id);
