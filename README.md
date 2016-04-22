@@ -9,4 +9,4 @@ To create a Google Chrome extension that lets the user select a given bookmark. 
 
 ## Current Status:
 
-It works for me. I may add a feature to choose bookmarks rather than having them natively in the code, but I'm good for now.
+It is almost ready to be used by other people. I still have to pass the id of the folder of bookmarks, but now, it creates all of the buttons based on the things in that folder, rather than me creating the buttons and creating linking them to the bookmarks manually, which was a real pain. 
