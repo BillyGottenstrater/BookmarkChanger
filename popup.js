@@ -80,20 +80,6 @@ function prepButtons(){
       initButton(btn.id,child.id);
     });
   });
-  // for(count;count>=0;count--){
-  //   var btn = document.getElementById(String(count));
-  //   btn.className += "b";
-  // }
-
-  // initButton("b1","223");
-  // initButton("b2","189");
-  // initButton("b3","267");
-  // initButton("b4","77");
-  // initButton("b5","202");
-  // initButton("b6","214");
-  // initButton("b7","222");
-  // initButton("b8","225");
-  // initButton("b9","231");
 }
 
 window.onload = function(){
