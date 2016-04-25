@@ -191,7 +191,6 @@ function initSearch(){
 	var b = document.getElementById("search");
 	b.onclick = function(){
 		search();
-		debugger;
 	}
 }
 
