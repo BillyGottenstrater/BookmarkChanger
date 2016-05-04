@@ -1,5 +1,6 @@
 
 function search(){
+	clearButtons();
 	var query = document.getElementById("bookmarkQuery").value;
 	debugger;
 	chrome.bookmarks.search(query,function(result){
@@ -16,7 +17,7 @@ function search(){
 					}
 					btn.innerHTML = btnHTML;
 					btn.id=each.id;
-					btn.className="b";
+					btn.className += "b";
 					//document.body.insertBefore(str,document.getElementById("loc2"));
 					document.body.insertBefore(btn,document.getElementById("loc2"));
 					var b = document.getElementById(each.id);
@@ -27,6 +28,10 @@ function search(){
 			});
 		});
 	});
+}
+
+function clearButtons(){
+	$(".b").remove();
 }
 
 function truncString(str, maxLen){
