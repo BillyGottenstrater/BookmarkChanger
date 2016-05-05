@@ -16,6 +16,30 @@
         outline:0;
       }
 
+      a:focus {
+        outline:0;
+      }
+
+      a:hover {
+        font-size:104%;
+        color:#3f5a5a;
+      }
+
+      #clear, #search {
+        background:none!important;
+        border:none; 
+        padding:0!important;
+        font: inherit;
+        font-size: .75em;
+        cursor: pointer;
+      }
+
+      #clear:hover, #search:hover {
+
+        font-size: .77em;
+        color:#3f5a5a;
+      }
+
       .b, .settings-button
       {
         font-family: "Lucida Console", "Monaco", monospace;
