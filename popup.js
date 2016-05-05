@@ -63,23 +63,44 @@ function truncString(str, maxLen){
 
 
 function prepButtons(){
-  var count = 0
+  // var count = 0
   var maxLen = 23
-  chrome.bookmarks.getChildren("186",function(children){
-    children.forEach(function(child){
-      var btn = document.createElement("button");
-      btn.id=String(count);
-      btn.className = "b";
-      if((child.title).length>maxLen){
-      btn.innerHTML=truncString(child.title,maxLen);
-      }else{
-        btn.innerHTML=child.title;
-      }
-      count++;
-      document.body.insertBefore(btn,document.getElementById("loc"));
-      initButton(btn.id,child.id);
+  chrome.storage.sync.get('BMC_Folders', function(folders) {
+    var things = folders["BMC_Folders"];
+    things.forEach(function(id){
+      debugger;
+      chrome.bookmarks.getChildren(id,function(children){
+        children.forEach(function(child){
+        var btn = document.createElement("button");
+        btn.id=child.id;
+        btn.className += "b";
+        if((child.title).length>maxLen){
+        btn.innerHTML=truncString(child.title,maxLen);
+        }else{
+          btn.innerHTML=child.title;
+        }
+        // count++;
+        document.body.insertBefore(btn,document.getElementById("loc"));
+        initButton(btn.id,child.id);
+        });
+      });
     });
   });
+  // chrome.bookmarks.getChildren("186",function(children){
+  //   children.forEach(function(child){
+  //     var btn = document.createElement("button");
+  //     btn.id=child.id;
+  //     btn.className += "b";
+  //     if((child.title).length>maxLen){
+  //     btn.innerHTML=truncString(child.title,maxLen);
+  //     }else{
+  //       btn.innerHTML=child.title;
+  //     }
+  //     // count++;
+  //     document.body.insertBefore(btn,document.getElementById("loc"));
+  //     initButton(btn.id,child.id);
+  //   });
+  // });
 }
 
 window.onload = function(){

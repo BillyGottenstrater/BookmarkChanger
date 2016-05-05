@@ -2,9 +2,7 @@
 function search(){
 	clearButtons();
 	var query = document.getElementById("bookmarkQuery").value;
-	debugger;
 	chrome.bookmarks.search(query,function(result){
-		debugger;
 		result.forEach(function(each){
 			isFolder(each,function(val){
 				if(val){
@@ -22,12 +20,33 @@ function search(){
 					document.body.insertBefore(btn,document.getElementById("loc2"));
 					var b = document.getElementById(each.id);
 					b.onclick = function(){
-    					// changeBookmark(id);
+						// clearBMCFolders();
+						chrome.storage.sync.get('BMC_Folders', function(folders) {
+							var things = folders["BMC_Folders"];
+							if(things){
+								debugger;
+								if(things.indexOf(each.id)==-1){
+									things.push(each.id); 
+								}
+							}else{
+								things=[each.id];
+							}
+							chrome.storage.sync.set({'BMC_Folders': things}, function() {
+								console.log(things);
+          					console.log('Consider it stored.');
+        					});
+        				});
   					}
 				}
 			});
 		});
 	});
+}
+
+function clearBMCFolders(){
+	chrome.storage.sync.set({'BMC_Folders': null}, function() {
+        console.log('Consider it cleared.');
+	 });
 }
 
 function clearButtons(){
@@ -196,6 +215,10 @@ function initSearch(){
 	var b = document.getElementById("search");
 	b.onclick = function(){
 		search();
+	}
+	var c = document.getElementById("clear");
+	c.onclick = function(){
+		clearBMCFolders();
 	}
 }
 
