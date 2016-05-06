@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Bookmark Changer",
-  "description": "This extension lets the user select a bookmark that they are constantly changing and switch it to the url of the current tab quickly and conveniently",
+  "description": "Lets the user select a bookmark that is constantly changing and switch it to the url of the current tab quickly and conveniently",
   "version": "1.0",
 
   "browser_action": {
