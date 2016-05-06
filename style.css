@@ -12,6 +12,13 @@
         text-align: center;
       }
 
+      .settings2
+      {
+        font-size:50%;
+        color: #1f2d2d;
+        text-align: right;
+      }
+
       button:focus {
         outline:0;
       }
@@ -62,14 +69,30 @@
         margin-top: 4.5px;
       }
 
-      .b:hover
+      .bmark:hover
       {
         background-color: #4d8fe6;
       }
 
-      .b:active
+      .bmark:active
       {
         background-color:#639de9;
+      }
+
+      .folder 
+      {
+        background-color: #1aa21a;
+        color: #ffffff;
+      }
+
+      .folder:hover
+      {
+        background-color: #24db24;
+      }
+
+      .folder:active
+      {
+        background-color: #50e250;
       }
 
       .settings-button
@@ -86,4 +109,10 @@
       .settings-button:active
       {
         background-color:#639de9;
+      }
+
+      #bookmarkQuery
+      {
+        font-family: "Lucida Console", "Monaco", monospace;
+        outline:0;
       }

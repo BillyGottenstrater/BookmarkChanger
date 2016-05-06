@@ -49,8 +49,8 @@ function changeB(id, button){
   });
 }
 
-function initButton(buttonId, id){
-  var b = document.getElementById(buttonId);
+function initButton(id){
+  var b = document.getElementById(id);
   //changeButton(id,buttonId);
   b.onclick = function(){
     changeBookmark(id);
@@ -63,44 +63,65 @@ function truncString(str, maxLen){
 
 
 function prepButtons(){
-  // var count = 0
   var maxLen = 23
-  chrome.storage.sync.get('BMC_Folders', function(folders) {
-    var things = folders["BMC_Folders"];
+  chrome.storage.sync.get('BMC_Folders', function(storage) {
+    var things = storage["BMC_Folders"];
     things.forEach(function(id){
-      debugger;
       chrome.bookmarks.getChildren(id,function(children){
         children.forEach(function(child){
-        var btn = document.createElement("button");
-        btn.id=child.id;
-        btn.className += "b";
-        if((child.title).length>maxLen){
-        btn.innerHTML=truncString(child.title,maxLen);
-        }else{
-          btn.innerHTML=child.title;
-        }
-        // count++;
-        document.body.insertBefore(btn,document.getElementById("loc"));
-        initButton(btn.id,child.id);
+          isFolder(child,function(val){
+            if(!val){
+              var btn = document.createElement("button");
+              btn.title= child.title +"\n"+child.url;
+              btn.id=child.id;
+              btn.className += "b";
+              btn.className += " bmark";
+              if((child.title).length>maxLen){
+                btn.innerHTML=truncString(child.title,maxLen);
+              }else{
+                btn.innerHTML=child.title;
+              }
+              document.body.insertBefore(btn,document.getElementById("loc"));
+              initButton(child.id);
+            }
+          }); 
         });
       });
     });
   });
-  // chrome.bookmarks.getChildren("186",function(children){
-  //   children.forEach(function(child){
-  //     var btn = document.createElement("button");
-  //     btn.id=child.id;
-  //     btn.className += "b";
-  //     if((child.title).length>maxLen){
-  //     btn.innerHTML=truncString(child.title,maxLen);
-  //     }else{
-  //       btn.innerHTML=child.title;
-  //     }
-  //     // count++;
-  //     document.body.insertBefore(btn,document.getElementById("loc"));
-  //     initButton(btn.id,child.id);
-  //   });
-  // });
+  chrome.storage.sync.get('BMC_Bookmarks', function(storage) {
+    var things = storage["BMC_Bookmarks"];
+    if(things){
+    things.forEach(function(id){
+      chrome.bookmarks.get(id,function(theBookmark){
+        var bmark = theBookmark[0]
+        debugger;
+        var btn = document.createElement("button");
+        btn.title= bmark.title +"\n"+bmark.url;
+        btn.id=bmark.id;
+        btn.className += "b";
+        btn.className += " bmark";
+        if((bmark.title).length>maxLen){
+        btn.innerHTML=truncString(bmark.title,maxLen);
+        }else{
+          btn.innerHTML=bmark.title;
+        }
+        // count++;
+        document.body.insertBefore(btn,document.getElementById("loc"));
+        initButton(bmark.id);
+      });
+    });
+  }
+  });
+}
+
+//Takes a string id returns true if it is a folder
+function isFolder(bookmark,callback){
+  var tree;
+  chrome.bookmarks.getSubTree(bookmark.id,function(arr){
+    tree = arr[0];
+    callback(Boolean(tree.children),bookmark)
+  });
 }
 
 window.onload = function(){

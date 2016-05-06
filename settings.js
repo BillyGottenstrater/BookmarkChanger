@@ -6,17 +6,16 @@ function search(){
 		result.forEach(function(each){
 			isFolder(each,function(val){
 				if(val){
-					// var str = document.createElement("p");
-					// str.innerHTML = each.title;
 					var btn = document.createElement("button");
 					var btnHTML = "Add: "+ each.title;
+					btn.title="Add Folder: "+each.title;
 					if(btnHTML.length>23){
 						btnHTML = truncString(btnHTML,23);
 					}
 					btn.innerHTML = btnHTML;
 					btn.id=each.id;
 					btn.className += "b";
-					//document.body.insertBefore(str,document.getElementById("loc2"));
+					btn.className += " folder";
 					document.body.insertBefore(btn,document.getElementById("loc2"));
 					var b = document.getElementById(each.id);
 					b.onclick = function(){
@@ -24,7 +23,6 @@ function search(){
 						chrome.storage.sync.get('BMC_Folders', function(folders) {
 							var things = folders["BMC_Folders"];
 							if(things){
-								debugger;
 								if(things.indexOf(each.id)==-1){
 									things.push(each.id); 
 								}
@@ -36,8 +34,45 @@ function search(){
           					console.log('Consider it stored.');
         					});
         				});
+					}
+  				}
+			});
+		});
+	});
+	chrome.bookmarks.search(query,function(result){
+		result.forEach(function(each){
+			isFolder(each,function(val){
+				if(!val){
+					var btn = document.createElement("button");
+					var btnHTML = "Add: "+ each.title;
+					btn.title="Add Bookmark: "+each.title +"\n"+each.url;
+					if(btnHTML.length>23){
+						btnHTML = truncString(btnHTML,23);
+					}
+					btn.innerHTML = btnHTML;
+					btn.id=each.id;
+					btn.className += "b";
+					btn.className += " bmark";
+					document.body.insertBefore(btn,document.getElementById("loc2"));
+					var b = document.getElementById(each.id);
+					b.onclick = function(){
+						// clearBMCFolders();
+						chrome.storage.sync.get('BMC_Bookmarks', function(bookmarks) {
+							var things = bookmarks["BMC_Bookmarks"];
+							if(things){
+								if(things.indexOf(each.id)==-1){
+									things.push(each.id); 
+								}
+							}else{
+								things=[each.id];
+							}
+							chrome.storage.sync.set({'BMC_Bookmarks': things}, function() {
+								console.log(things);
+          						console.log('Consider it stored.');
+        					});
+        				});
   					}
-				}
+  				}
 			});
 		});
 	});
@@ -46,7 +81,10 @@ function search(){
 function clearBMCFolders(){
 	chrome.storage.sync.set({'BMC_Folders': null}, function() {
         console.log('Consider it cleared.');
-	 });
+	});
+	chrome.storage.sync.set({'BMC_Bookmarks': null}, function() {
+        console.log('Consider it cleared.');
+	});
 }
 
 function clearButtons(){
@@ -65,7 +103,6 @@ function isFolder(bookmark,callback){
 		tree = arr[0];
 		callback(Boolean(tree.children),bookmark)
 	});
-
 }
 
 function initSearch(){
@@ -87,4 +124,5 @@ function initSearch(){
 window.onload = function(){
   //initialize();
   initSearch();
+  $("#bookmarkQuery").trigger( "focus" );
 }

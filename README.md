@@ -9,4 +9,4 @@ To create a Google Chrome extension that lets the user select a given bookmark. 
 
 ## Current Status:
 
-It is almost ready to be used by other people. The search functionality has been added, but it doesn't lead to anything. That's the next step: Allow the search to actually do something. Once that's done, Chrome Web Store here we come!
+It's basically ready. I'll be making some touchups here and there, but otherwise, it does exactly what I want it to do, and is completely functional for any user.
