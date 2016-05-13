@@ -9,4 +9,4 @@ To create a Google Chrome extension that lets the user select a given bookmark. 
 
 ## Current Status:
 
-It's basically ready. I'll be making some touchups here and there, but otherwise, it does exactly what I want it to do, and is completely functional for any user.
+It's basically ready. I'll be making some touchups here and there, but otherwise, it does exactly what I want it to do, and is completely functional for any user. There is now functionality for removing individual bookmarks and folders instead of clearing all. Info page to be added soon as well. Oh yeah, I almost forgot. It's on the CHROME WEBSTORE, BABY!

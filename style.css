@@ -95,6 +95,22 @@
         background-color: #50e250;
       }
 
+      .pressed 
+      {
+        background-color: #2E3849;
+        color: #ffffff;
+      }
+
+      .pressed:hover
+      {
+        background-color: #334561;
+      }
+
+      .pressed:active
+      {
+        background-color: #2C466C;
+      }
+
       .settings-button
       {
         width: 356px;
