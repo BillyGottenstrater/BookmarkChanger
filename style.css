@@ -5,18 +5,40 @@
         width: 358px;
         background-color: #cccccc;
       }
+      
+      ul 
+      {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      li 
+      {
+        float: left;
+        font-size: 90%;
+      }
+
+      li a 
+      {
+        display: block;
+        padding: 8px;
+        color:#1f2d2d;
+        text-align: center;
+        background-color: #dddddd;
+      }
+
+      div.navbar
+      { 
+        background-color:#dddddd;
+        box-shadow: 1px 1px 1px #888888;
+      }
 
       .settings
       {
         color: #1f2d2d;
         text-align: center;
-      }
-
-      .settings2
-      {
-        font-size:50%;
-        color: #1f2d2d;
-        text-align: right;
       }
 
       button:focus {
@@ -28,7 +50,7 @@
       }
 
       a:hover {
-        font-size:104%;
+        font-size:102%;
         color:#3f5a5a;
       }
 
@@ -125,6 +147,12 @@
       .settings-button:active
       {
         background-color:#639de9;
+      }
+
+      .link-list
+      {
+        text-align: right;
+        display:inline-block;
       }
 
       #bookmarkQuery

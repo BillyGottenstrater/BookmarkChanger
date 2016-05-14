@@ -14,11 +14,10 @@ function search(){
 					btn.className += " folder";
 					chrome.storage.sync.get('BMC_Folders', function(folders) {
 						var things = folders["BMC_Folders"];
-						if(things){
+						if(things!= null){
 							if(things.indexOf(each.id)>=0){
 						 		btn.className += " pressed";
-						 		btnHTML = btnHTML.slice(3,btnHTML.length+1);
-						 		btnHTML = "Remove".concat(btnHTML);
+						 		btnHTML = "Remove: ".concat(each.title);
 						 		btn.title="Remove Folder: "+each.title;
 							}else{
 
@@ -35,25 +34,22 @@ function search(){
 						// clearBMCFolders();
 						chrome.storage.sync.get('BMC_Folders', function(folders) {
 							var things = folders["BMC_Folders"];
-							if(things){
-								debugger;
+							if(things!= null){
 								if(things.indexOf(each.id)==-1){
 									things.push(each.id); 
-									btn.className += " pressed";
-						 			btnHTML = btnHTML.slice(3,btnHTML.length+1);
-						 			btnHTML = "Remove".concat(btnHTML);
+									btn.className += " pressed"; 
+						 			btnHTML = "Remove: ".concat(each.title);
 						 			btn.title="Remove Folder: "+each.title;
 								}else{
 									var idx = things.indexOf(each.id);
-									things = things.splice(idx,idx);
+									things.splice(idx,1);
 									$("#"+btn.id).removeClass("pressed");
 									btnHTML="Add: ".concat(each.title);
 								}
 							}else{
 								things=[each.id];
 								btn.className += " pressed";
-						 		btnHTML = btnHTML.slice(3,btnHTML.length+1);
-						 		btnHTML = "Remove".concat(btnHTML);
+						 		btnHTML = "Remove: ".concat(each.title);
 						 		btn.title="Remove Folder: "+each.title;
 							}
 							chrome.storage.sync.set({'BMC_Folders': things}, function() {
@@ -86,16 +82,18 @@ function search(){
 					btn.className += " bmark";
 					chrome.storage.sync.get('BMC_Bookmarks', function(bookmarks) {
 						var things = bookmarks["BMC_Bookmarks"];
-						if(things){
+						if(things!= null){
 							if(things.indexOf(each.id)>=0){
 								btn.className += " pressed";
-						 		btnHTML = btnHTML.slice(3,btnHTML.length+1);
-						 		btnHTML = "Remove".concat(btnHTML);
+						 		btnHTML = "Remove: ".concat(each.title);
 						 		btn.title="Remove Bookmark: "+each.title;
 							}else{
 						
 							}
-						}	
+						}
+						if(btnHTML.length>23){
+							btnHTML = truncString(btnHTML,23);
+						}
 						btn.innerHTML=btnHTML;
         			});
 					document.body.insertBefore(btn,document.getElementById("loc2"));
@@ -104,16 +102,15 @@ function search(){
 						// clearBMCFolders();
 						chrome.storage.sync.get('BMC_Bookmarks', function(bookmarks) {
 							var things = bookmarks["BMC_Bookmarks"];
-							if(things){
+							if(things!= null){
 								if(things.indexOf(each.id)==-1){
 									things.push(each.id); 
 									btn.className += " pressed";
-						 			btnHTML = btnHTML.slice(3,btnHTML.length+1);
-						 			btnHTML = "Remove".concat(btnHTML);
+						 			btnHTML = "Remove: ".concat(each.title);
 						 			btn.title="Remove Folder: "+each.title;
 								}else{
 									var idx = things.indexOf(each.id);
-									things = things.splice(idx,idx);
+									things.splice(idx,1);
 									$("#"+btn.id).removeClass("pressed");
 									btnHTML="Add: ".concat(each.title);
 									btn.title="Add Bookmark".concat(each.title+"\n"+each.url)
@@ -121,14 +118,17 @@ function search(){
 							}else{
 								things=[each.id];
 								btn.className += " pressed";
-						 		btnHTML = btnHTML.slice(3,btnHTML.length+1);
-						 		btnHTML = "Remove".concat(btnHTML);
+						 		btnHTML = "Remove: ".concat(each.title);
 						 		btn.title="Remove Bookmark: "+each.title+"\n"+each.url;
 							}
 							chrome.storage.sync.set({'BMC_Bookmarks': things}, function() {
 								console.log(things);
           						console.log('Consider it stored.');
         					});
+							if(btnHTML.length>23){
+								btnHTML = truncString(btnHTML,23);
+							}
+        					btn.innerHTML=btnHTML;
         				});
   					}
   				}
