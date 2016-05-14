@@ -6,7 +6,7 @@
         background-color: #cccccc;
       }
       
-      ul 
+      ul.nav 
       {
         list-style-type: none;
         margin: 0;
@@ -50,7 +50,7 @@
       }
 
       a:hover {
-        font-size:102%;
+        -webkit-transform: scale(1.02);
         color:#3f5a5a;
       }
 

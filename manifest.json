@@ -3,7 +3,7 @@
 
   "name": "Bookmark Changer",
   "description": "Lets the user select a bookmark that is constantly changing and switch it to the url of the current tab quickly and conveniently",
-  "version": "1.2",
+  "version": "1.21",
 
   "browser_action": {
     "default_icon": "icon2.png",
