@@ -65,7 +65,7 @@
 
       #clear:hover, #search:hover {
 
-        font-size: .77em;
+        -webkit-transform: scale(1.02);
         color:#3f5a5a;
       }
 
