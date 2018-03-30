@@ -115,6 +115,7 @@ function prepButtons(){
   });
 }
 
+
 //Takes a string id returns true if it is a folder
 function isFolder(bookmark,callback){
   var tree;
